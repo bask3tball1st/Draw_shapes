@@ -1,6 +1,11 @@
 ﻿#include <iostream>
 #include "glut.h"
-#include "Test.h"
+#include "Figure.h"
+#include "Triangle.h"
+#include "Rectangle.h"
+#include "Rhombus.h"
+#include "Circle.h"
+#include "Ellipse.h"
 
 GLint Width = 512, Height = 512;
 const int CubeSize = 200;
@@ -32,23 +37,6 @@ void Reshape(GLint w, GLint h) {
 	glLoadIdentity();
 }
 
-void SKeyboard(int key, int x, int y) {
-	if (key == '1')
-		exit(1);
-	/*if (key == GLUT_KEY_UP) {
-		if (ct < vt.size() - 1)
-			ct++;
-		if (vt[ct].check())
-			mt = ct;
-	}
-	if (key == GLUT_KEY_DOWN)
-		ct--;*/
-}
-
-bool choiceAnsw(int answ) {
-	return answ == YES ? true : false;
-}
-
 void printQuest() {
 	std::cout << "Do you want to enter width";
 	std::cout << " and height of the shape ? " << std::endl;
@@ -69,7 +57,7 @@ void Display(void) {
 		Triangle t;
 		int answer;
 		std::cin >> answer;
-		if (choiceAnsw(answer)) {
+		if (answer == YES) {
 			std::cout << "Enter width and height separated by spaces: ";
 			int h, w;
 			std::cin >> w >> h;
@@ -84,7 +72,16 @@ void Display(void) {
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glPointSize(10);
+		printQuest();
 		Rectangle q;
+		int answer;
+		std::cin >> answer;
+		if (answer == YES) {
+			std::cout << "Enter width and height separated by spaces: ";
+			int h, w;
+			std::cin >> w >> h;
+			q = Rectangle(w, h);
+		}
 		q.draw();
 		glFinish();
 		break;
@@ -94,7 +91,16 @@ void Display(void) {
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glPointSize(10);
+		printQuest();
 		Rhombus r;
+		int answer;
+		std::cin >> answer;
+		if (answer == YES) {
+			std::cout << "Enter width and height separated by spaces: ";
+			int h, w;
+			std::cin >> w >> h;
+			r = Rhombus(w, h);
+		}
 		r.draw();
 		glFinish();
 		break;
@@ -104,11 +110,18 @@ void Display(void) {
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glPointSize(10);
+		std::cout << "Do you want to enter the radius of the circle?" << std::endl;
+		std::cout << "1. Yes" << std::endl;
+		std::cout << "2. No" << std::endl;
 		Circle c;
-		std::cout << "Enter the radius of the circle:" << std::endl;
-		int radius;
-		std::cin >> radius;
-		c.setRadius(radius);
+		int answer;
+		std::cin >> answer;
+		if (answer == YES) {
+			std::cout << "Enter the radius of the circle:" << std::endl;
+			int radius;
+			std::cin >> radius;
+			c = Circle(radius);
+		}
 		c.draw();
 		glFinish();
 		break;
@@ -118,7 +131,16 @@ void Display(void) {
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glPointSize(10);
+		printQuest();
 		Ellipse e;
+		int answer;
+		std::cin >> answer;
+		if (answer == YES) {
+			std::cout << "Enter width and height separated by spaces: ";
+			int h, w;
+			std::cin >> w >> h;
+			e = Ellipse(w, h);
+		}
 		e.draw();
 		glFinish();
 		break;
